@@ -1,5 +1,3 @@
-import itertools
-
 def solve():
     a, b, c, d = input()
     for bit in range(2 ** 3):
