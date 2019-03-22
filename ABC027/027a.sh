@@ -1,0 +1,1 @@
+sed 's/ /\n/g' | sort -n | uniq -c | awk '($1!=2){print $2}'
