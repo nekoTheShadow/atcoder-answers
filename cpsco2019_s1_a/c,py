@@ -1,0 +1,19 @@
+import itertools
+
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+
+ans = float('inf')
+for idxs in itertools.combinations(range(n), r=k):
+    amount = sum(a[idx] for idx in idxs)
+    count = 0
+    while amount > 0:
+        digit = amount % 10
+        if digit < 5:
+            count += digit
+        else:
+            count += digit - 4
+        amount //= 10
+    ans = min(ans, count)
+
+print(ans)
