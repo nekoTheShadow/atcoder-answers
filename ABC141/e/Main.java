@@ -4,18 +4,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.stream.IntStream;
 
 public class Main {
     public void solve(BufferedReader stdin, PrintWriter stdout) throws NumberFormatException, IOException {
         int n = Integer.parseInt(stdin.readLine());
         String s = stdin.readLine();
-        int max = IntStream.range(1, n).map(i -> zAlgorithm(s.substring(i))).max().orElse(0);
+
+        int max = 0;
+        for (int i = 0; i < n; i++) {
+            int[] a = zAlgorithm(s.substring(i));
+            for (int j = 1; j < a.length; j++) {
+                max = Math.max(max, Math.min(j, a[j]));
+            }
+        }
+
         stdout.println(max);
     }
 
 
-    private int zAlgorithm(String s) {
+    private int[] zAlgorithm(String s) {
         int n = s.length();
         int[] a = new int[n];
         int i = 1;
@@ -39,7 +46,7 @@ public class Main {
             i += k;
             j -= k;
         }
-        return IntStream.range(1, n).map(x -> a[x]).max().orElse(0);
+        return a;
     }
 
     public static void main(String[] args) throws NumberFormatException, IOException {
